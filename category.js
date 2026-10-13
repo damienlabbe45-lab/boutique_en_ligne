@@ -23,8 +23,9 @@ class CategoryHtml extends Category{
         list_cat.appendChild(nameHtml);
         nameHtml.addEventListener('click', function(){
             new CustomEvent("category-selected", {detail: this.textContent, bubbles: true})
+            nameHtml.dispatchEvent(myEvent);
         });
-        nameHtml.dispatchEvent(myEvent);
+        
     }
 }
 
