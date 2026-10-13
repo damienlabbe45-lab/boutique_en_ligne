@@ -15,11 +15,22 @@ const list_cat = document.createElement('ul');
 
 list_cat.id = 'cat'
 
+class CategoryHtml extends Category{
+    constructor(name){
+        super(name);
+        const nameHtml = document.createElement('li');
+        nameHtml.textContent = this.name;
+        list_cat.appendChild(nameHtml);
+        nameHtml.addEventListener('click', function(){
+            new CustomEvent("category-selected", {detail: this.textContent, bubbles: true})
+        });
+        nameHtml.dispatchEvent(myEvent);
+    }
+}
 
 
-
-const categories = [ new Category("Alimentaire"), new Category("vêtements") , new Category("meubles"), new Category("Outils"), 
-    new Category("Lingerie")]
+const categories = [ new CategoryHtml("Alimentaire"), new CategoryHtml("vêtements") , new CategoryHtml("meubles"), new CategoryHtml("Outils"), 
+    new CategoryHtml("Lingerie")]
 
 function categories_filter(word){
     return categories.filter(cat => cat.name.toLowerCase().includes(word));
