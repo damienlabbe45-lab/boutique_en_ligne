@@ -1,3 +1,9 @@
+
+
+const articleContainer = document.getElementById("article-container")
+
+
+
 // Création des articles
 const categories = ["nourriture", "vêtement", "meuble", "outil", "livre"]
 
@@ -16,6 +22,8 @@ function capitalize( word){
 return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 }
 
+
+
 function createArticle(article) {
     const element = document.createElement("div")
     element.classList.add("article")
@@ -31,7 +39,6 @@ function createArticle(article) {
 
     element.append(name, category, price)
 
-    const articleContainer = document.getElementById("article-container")
     articleContainer.append(element)
 }
 
