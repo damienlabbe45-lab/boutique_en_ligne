@@ -2,6 +2,7 @@
 const categories = ["nourriture", "vêtement", "meuble", "outil", "livre"]
 
 
+
 const articles = [
     {name: "Pizza", category: categories[0], price: 4},
     {name: "Pantalon", category: categories[1], price: 28},
@@ -11,15 +12,19 @@ const articles = [
     {name: "La bible", category: categories[4], price: 800},
 ]
 
+function capitalize( word){
+return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+}
+
 function createArticle(article) {
     const element = document.createElement("div")
     element.classList.add("article")
 
     const name = document.createElement("h2");
-    name.textContent = article.name
+    name.textContent = capitalize(article.name)
 
     const category = document.createElement("p")
-    category.textContent = article.category
+    category.textContent = capitalize(article.category)
 
     const price = document.createElement("p")
     price.textContent = article.price
@@ -30,4 +35,4 @@ function createArticle(article) {
     articleContainer.append(element)
 }
 
-articles.map(article => createArticle(article))
+let articlesHtml = articles.map(article => createArticle(article))
