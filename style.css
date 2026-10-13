@@ -1,6 +1,6 @@
 
 body {
-    font: arial;
+    font-family: 'Helvetica', 'Arial', sans-serif;
 }
 
 header {
@@ -11,7 +11,10 @@ header {
 
 .header-logo {
     width: 20%;
-    border-right: solid 2px gray;
+    font-size: large;
+    font-weight: 600;
+    text-align: center;
+    margin: auto;
 }
 
 .tab-list {
@@ -23,6 +26,7 @@ header {
     width: stretch;
     text-align: center;
     align-items: center;
+    border-left: solid 2px gray;
 }
 
 .tab-link {
@@ -31,8 +35,10 @@ header {
     min-width: auto;
     border: none;
     background-color: #eee;
-
+    font-size: large;
+    font-weight: 600;
 }
+
 .tab-link:hover {
     background-color: #ddd;
 }
