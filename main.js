@@ -22,7 +22,7 @@ function createArticle(article) {
     category.textContent = article.category
 
     const price = document.createElement("p")
-    price.textContent = article.price
+    price.textContent = article.price + " €"
 
     element.append(name, category, price)
 
