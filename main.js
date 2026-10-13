@@ -71,3 +71,13 @@ const categories_sort = [...categories].sort((a, b) => {
 })
 
 let categorieHtml = categories_sort.map(categorie => createCategory(categorie))
+
+document.addEventListener("category-selected"), function(event){
+    const categorieChoice = event.detail.toLowerCase();
+    articleContainer.removeChild("div")
+
+    articlesFilter = articles_sort.filter(art => art.category.toLowerCase().includes(categorieChoice))
+
+   articlesHtml = articles_filter.map(article => createArticle(article))
+}
+
