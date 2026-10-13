@@ -2,7 +2,7 @@ class Category {
     name;
 
     constructor(name){
-        name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+        this.name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
         /** permet de créé l'quivalent de capitalize en python (met en majuscule que la 1ère lettre) */
     }
 
