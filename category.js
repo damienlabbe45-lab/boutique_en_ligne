@@ -11,6 +11,10 @@ class Category {
     }
 }
 
+const list_cat = document.createElement('ul');
+
+
+
 
 const categories = [ new Category("Alimentaire"), new Category("vêtements") , new Category("meubles"), new Category("Outils"), 
     new Category("Lingerie")]
