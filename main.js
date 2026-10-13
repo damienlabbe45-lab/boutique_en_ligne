@@ -23,6 +23,10 @@ const articles = [
     {name: "Table basse", category: categories[3], price: 60},
     {name: "Marteau", category: categories[4], price: 10},
     {name: "La bible", category: categories[5], price: 800},
+    {name: "pates", category: categories[1], price: 12},
+    {name: "Lit", category: categories[3] , price: 24},
+    {name: "Les ordinateurs pour les nuls", category: categories[5], price: 1},
+    {name: "Tournevis", category: categories[4], price: 8900}
 ]
 
 function capitalize( word){
