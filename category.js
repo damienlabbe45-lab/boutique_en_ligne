@@ -25,3 +25,5 @@ function initCategories(){
 })
 const categories_string = "\n- " + categories_sort.join("\n- ");
 }
+
+initCategories()
