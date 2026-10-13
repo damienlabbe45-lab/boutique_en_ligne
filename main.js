@@ -34,6 +34,7 @@ return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 function createCategory(categorie){
 
     const nameHtml = document.createElement('li');
+    nameHtml.id ="ele"
         nameHtml.textContent = capitalize(categorie);
         list_cat.appendChild(nameHtml);
         nameHtml.addEventListener('click', function(){
