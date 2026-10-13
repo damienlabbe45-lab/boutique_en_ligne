@@ -12,17 +12,17 @@ list_cat.id = 'cat'
 categoryContainer.appendChild(list_cat)
 
 // Création des articles
-const categories = ["nourriture", "vêtement", "meuble", "outil", "livre"]
+const categories = ["tous", "nourriture", "vêtement", "meuble", "outil", "livre"]
 
 
 
 const articles = [
-    {name: "Pizza", category: categories[0], price: 4},
-    {name: "Pantalon", category: categories[1], price: 28},
-    {name: "Jupe", category: categories[1], price: 200},
-    {name: "Table basse", category: categories[2], price: 60},
-    {name: "Marteau", category: categories[3], price: 10},
-    {name: "La bible", category: categories[4], price: 800},
+    {name: "Pizza", category: categories[1], price: 4},
+    {name: "Pantalon", category: categories[2], price: 28},
+    {name: "Jupe", category: categories[2], price: 200},
+    {name: "Table basse", category: categories[3], price: 60},
+    {name: "Marteau", category: categories[4], price: 10},
+    {name: "La bible", category: categories[5], price: 800},
 ]
 
 function capitalize( word){
@@ -63,21 +63,24 @@ const articles_sort = [...articles].sort((a, b) => {
     return a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' });
 })
 
-let articlesHtml = articles_sort.map(article => createArticle(article))
+articles_sort.map(article => createArticle(article))
 
 
 const categories_sort = [...categories].sort((a, b) => {
     return a.localeCompare(b, 'fr', { sensitivity: 'base' });
 })
 
-let categorieHtml = categories_sort.map(categorie => createCategory(categorie))
+categories_sort.map(categorie => createCategory(categorie))
 
-document.addEventListener("category-selected"), function(event){
+document.addEventListener("category-selected", function(event){
     const categorieChoice = event.detail.toLowerCase();
-    articleContainer.removeChild("div")
+    articleContainer.innerHTML = "";
 
-    articlesFilter = articles_sort.filter(art => art.category.toLowerCase().includes(categorieChoice))
 
-   articlesHtml = articles_filter.map(article => createArticle(article))
-}
+    if(categorieChoice =="tous") articles_sort.map(article => createArticle(article))
+
+    else{
+        articlesFilter = articles_sort.filter(art => art.category.toLowerCase().includes(categorieChoice))
+        articlesFilter.map(article => createArticle(article))}
+})
 
