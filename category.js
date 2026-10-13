@@ -13,6 +13,8 @@ class Category {
 
 const list_cat = document.createElement('ul');
 
+list_cat.id = 'cat'
+
 
 
 
