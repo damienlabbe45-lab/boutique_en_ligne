@@ -44,7 +44,7 @@ function initCategories(){
     const categories_sort = [...categories].sort((a, b) => {
     return a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' });
 })
-const categories_html = categories_filter.map(cat => CategoryHtml.fromCategory(cat));
+const categories_html = categories_sort.map(cat => CategoryHtml.fromCategory(cat));
 }
 
 initCategories()
