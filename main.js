@@ -2,7 +2,14 @@
 
 const articleContainer = document.getElementById("article-container")
 
+const categoryContainer = document.getElementById("category-container")
 
+
+const list_cat = document.createElement('ul');
+
+list_cat.id = 'cat'
+
+categoryContainer.appendChild(list_cat)
 
 // Création des articles
 const categories = ["nourriture", "vêtement", "meuble", "outil", "livre"]
@@ -24,6 +31,16 @@ return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 
 
 
+function createCategory(categorie){
+
+    const nameHtml = document.createElement('li');
+        nameHtml.textContent = capitalize(categorie);
+        list_cat.appendChild(nameHtml);
+        nameHtml.addEventListener('click', function(){
+            nameHtml.dispatchEvent(new CustomEvent("category-selected", {detail: this.textContent, bubbles: true}));
+        }); 
+}
+
 function createArticle(article) {
     const element = document.createElement("div")
     element.classList.add("article")
@@ -43,3 +60,6 @@ function createArticle(article) {
 }
 
 let articlesHtml = articles.map(article => createArticle(article))
+
+
+let categorieHtml = categories.map(categorie => createCategory(categorie))
