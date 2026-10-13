@@ -18,3 +18,10 @@ const categories = [ new Category("Alimentaire"), new Category("vêtements") , n
 function categories_filter(word){
     return categories.filter(cat => cat.name.toLowerCase().includes(word));
 }
+
+function initCategories(){
+    const categories_sort = [...categories].sort((a, b) => {
+    return a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' });
+})
+const categories_string = "\n- " + categories_sort.join("\n- ");
+}
