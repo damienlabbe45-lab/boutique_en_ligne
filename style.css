@@ -1,0 +1,38 @@
+
+body {
+    font: arial;
+}
+
+header {
+    display: flex;
+    border-bottom: solid 2px gray;
+    height: 70px;
+}
+
+.header-logo {
+    width: 20%;
+    border-right: solid 2px gray;
+}
+
+.tab-list {
+    display: flex;
+    width: 80%;
+}
+
+.tab {
+    width: stretch;
+    text-align: center;
+    align-items: center;
+}
+
+.tab-link {
+    width: stretch;
+    height: stretch;
+    min-width: auto;
+    border: none;
+    background-color: #eee;
+
+}
+.tab-link:hover {
+    background-color: #ddd;
+}
