@@ -59,7 +59,15 @@ function createArticle(article) {
     articleContainer.append(element)
 }
 
-let articlesHtml = articles.map(article => createArticle(article))
+const articles_sort = [...articles].sort((a, b) => {
+    return a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' });
+})
+
+let articlesHtml = articles_sort.map(article => createArticle(article))
 
 
-let categorieHtml = categories.map(categorie => createCategory(categorie))
+const categories_sort = [...categories].sort((a, b) => {
+    return a.localeCompare(b, 'fr', { sensitivity: 'base' });
+})
+
+let categorieHtml = categories_sort.map(categorie => createCategory(categorie))
