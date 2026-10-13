@@ -29,8 +29,8 @@ class CategoryHtml extends Category{
 }
 
 
-const categories = [ new CategoryHtml("Alimentaire"), new CategoryHtml("vêtements") , new CategoryHtml("meubles"), new CategoryHtml("Outils"), 
-    new CategoryHtml("Lingerie")]
+const categories = [ new CategoryHtml("Alimentaire"), new CategoryHtml("vêtements") , new CategoryHtml("meubles"), 
+    new CategoryHtml("Outils"), new CategoryHtml("Lingerie"), new CategoryHtml("Livres")]
 
 function categories_filter(word){
     return categories.filter(cat => cat.name.toLowerCase().includes(word));
