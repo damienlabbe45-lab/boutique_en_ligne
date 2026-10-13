@@ -7,7 +7,7 @@ class Category {
     }
 
     toString(){
-        return this.name
+        return "- " + this.name + "\n"
     }
 }
 
@@ -22,8 +22,7 @@ class CategoryHtml extends Category{
         nameHtml.textContent = this.name;
         list_cat.appendChild(nameHtml);
         nameHtml.addEventListener('click', function(){
-            new CustomEvent("category-selected", {detail: this.textContent, bubbles: true})
-            nameHtml.dispatchEvent(myEvent);
+            nameHtml.dispatchEvent(new CustomEvent("category-selected", {detail: this.textContent, bubbles: true}));
         });
         
     }
@@ -41,7 +40,7 @@ function initCategories(){
     const categories_sort = [...categories].sort((a, b) => {
     return a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' });
 })
-const categories_string = "\n- " + categories_sort.join("\n- ");
+const categories_string =  categories_sort.join("");
 }
 
 initCategories()
