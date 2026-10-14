@@ -94,6 +94,12 @@ body {
     background-color: #ddd;
 }
 
+.quantity-buttons button {
+    display: block;
+    width: 30px;
+    padding-inline: auto;
+}
+
 #cat {
     list-style: none;       /* Supprime les points noirs */
     display: flex;

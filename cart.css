@@ -30,7 +30,7 @@
     transform: translateX(0);
 }
 
-.cart-button, .remove-button {
+.cart-button, .remove-all-button {
     padding: 10px 20px;
     background-color: #2563eb;
     color: white;

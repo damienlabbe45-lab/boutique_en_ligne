@@ -132,32 +132,42 @@ function addArticleToCart(article) {
         const quantity = document.createElement("p")
         quantity.textContent = "Quantité : " + article.quantity
 
+        // Boutons +/- pour modifier la quantité
+        const quantityButtons = document.createElement("div")
+        quantityButtons.classList.add("quantity-buttons")
+
         // Bouton pour ajouter l'article au panier
-        const buttonAdd = document.createElement("button")
-        buttonAdd.textContent = "Ajouter 1"
-        buttonAdd.onclick = function() {
+        const buttonAddOne = document.createElement("button")
+        buttonAddOne.classList.add("add-one-button")
+        buttonAddOne.textContent = "+"
+        buttonAddOne.onclick = function() {
             addArticleToCart(article);
-        };
-        // Bouton pour retirer l'article du panier
-        const buttonRemoveAll = document.createElement("button")
-        buttonRemoveAll.textContent = "Retirer du panier"
-        buttonRemoveAll.onclick = function() {
-            removeArticleFromCart(article);
         };
 
         // Bouton pour enlever 1 à la quantité de l'article dans panier
         const buttonRemoveOne = document.createElement("button")
-        buttonRemoveAll.classList.add("remove-button")
-        buttonRemoveOne.textContent = "Retirer 1"
+        buttonRemoveOne.classList.add("remove-one-button")
+        buttonRemoveOne.textContent = "-"
         buttonRemoveOne.onclick = function() {
             removeOneArticleFromCart(article);
         };
+
+        quantityButtons.append(buttonAddOne, buttonRemoveOne)
+
+        // Bouton pour retirer l'article du panier
+        const buttonRemoveAll = document.createElement("button")
+        buttonRemoveAll.classList.add("remove-all-button")
+        buttonRemoveAll.textContent = "Retirer du panier"
+        buttonRemoveAll.onclick = function() {
+            removeArticleFromCart(article);
+        };
+        
 
         // Bouton pour payer
         const payButton = document.getElementsByClassName("cart-button")[0]
         payButton.addEventListener('click', pay)
 
-        element.append(name, category, price, quantity, buttonAdd, buttonRemoveAll, buttonRemoveOne)
+        element.append(name, category, price, quantity, quantityButtons, buttonRemoveAll)
 
         // Ajouter la balise
         cart.append(element)
