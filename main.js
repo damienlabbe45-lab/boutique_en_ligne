@@ -1,7 +1,11 @@
+//fonctions utilitaires pour tout le monde
 
+function capitalize( word){
+return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+/** met en majuscusle le 1 er caractère d'une chaïne de caractère. cette fonction est inspirée de la fonction capitalize de python */
+}
 
-const articleContainer = document.getElementById("article-container")
-
+//création des catégories
 const categoryContainer = document.getElementById("category-container")
 
 
@@ -11,10 +15,51 @@ list_cat.id = 'cat'
 
 categoryContainer.appendChild(list_cat)
 
-// Création des articles
 const categories = ["tous", "nourriture", "vêtement", "meuble", "outil", "livre"]
 
 
+function createCategory(categorie){
+/**créé pour chaque catégorie un élément de liste qui contient la catégorie et si on clique sur la catégorie de déclencher
+ * l'évènement category-selected qui sera propagé jusqu'à ce fichier et ailleurs.
+ */
+    const nameHtml = document.createElement('li');
+    nameHtml.id ="ele"
+        nameHtml.textContent = capitalize(categorie);
+        list_cat.appendChild(nameHtml);
+        nameHtml.addEventListener('click', function(){
+            nameHtml.dispatchEvent(new CustomEvent("category-selected", {detail: this.textContent, bubbles: true}));
+        }); 
+}
+
+const categories_sort = [...categories].sort((a, b) => {
+    return a.localeCompare(b, 'fr', { sensitivity: 'base' });
+})
+/** trie les catégories dans l'ordre alphabètique */
+
+categories_sort.map(categorie => createCategory(categorie))
+
+/**fonction pour l'évènement category-selected */
+document.addEventListener("category-selected", function(event){
+    const categorieChoice = event.detail.toLowerCase();
+    /** on met en minuscule detail qui contient le nom de la catégorie */
+    articleContainer.innerHTML = "";
+
+    /** le innerHTML devient vide */
+
+    if(categorieChoice =="tous") articles_sort.map(article => createArticle(article))
+        /** si categorie vaut tous,  on prend tout les articles et on les recréé */
+
+    else{
+        articlesFilter = articles_sort.filter(art => art.category.toLowerCase().includes(categorieChoice))
+        articlesFilter.map(article => createArticle(article))}
+        /**sinon on filtre les articles en fonction du nom de la catégorie puis on créé uniquement les articles concernés */
+})
+
+
+// Création des articles
+
+
+const articleContainer = document.getElementById("article-container")
 
 const articles = [
     {name: "Pizza", category: categories[1], price: 4},
@@ -29,22 +74,6 @@ const articles = [
     {name: "Tournevis", category: categories[4], price: 8900}
 ]
 
-function capitalize( word){
-return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-}
-
-
-
-function createCategory(categorie){
-
-    const nameHtml = document.createElement('li');
-    nameHtml.id ="ele"
-        nameHtml.textContent = capitalize(categorie);
-        list_cat.appendChild(nameHtml);
-        nameHtml.addEventListener('click', function(){
-            nameHtml.dispatchEvent(new CustomEvent("category-selected", {detail: this.textContent, bubbles: true}));
-        }); 
-}
 
 function createArticle(article) {
     const element = document.createElement("div")
@@ -118,24 +147,3 @@ const articles_sort = [...articles].sort((a, b) => {
 })
 
 articles_sort.map(article => createArticle(article))
-
-
-const categories_sort = [...categories].sort((a, b) => {
-    return a.localeCompare(b, 'fr', { sensitivity: 'base' });
-})
-
-categories_sort.map(categorie => createCategory(categorie))
-
-
-document.addEventListener("category-selected", function(event){
-    const categorieChoice = event.detail.toLowerCase();
-    articleContainer.innerHTML = "";
-
-
-    if(categorieChoice =="tous") articles_sort.map(article => createArticle(article))
-
-    else{
-        articlesFilter = articles_sort.filter(art => art.category.toLowerCase().includes(categorieChoice))
-        articlesFilter.map(article => createArticle(article))}
-})
-
