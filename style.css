@@ -42,3 +42,17 @@ header {
 .tab-link:hover {
     background-color: #ddd;
 }
+
+#cat {
+    list-style: none;       /* Supprime les points noirs */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+}
+
+#ele{
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: medium;
+}
