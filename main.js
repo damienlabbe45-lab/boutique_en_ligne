@@ -12,29 +12,32 @@ list_cat.id = 'cat'
 categoryContainer.appendChild(list_cat)
 
 // Création des articles
+
+// Catégories
 const categories = ["tous", "nourriture", "vêtement", "meuble", "outil", "livre"]
 
 
-
+// Articles
 const articles = [
-    {name: "Pizza", category: categories[1], price: 4},
-    {name: "Pantalon", category: categories[2], price: 28},
-    {name: "Jupe", category: categories[2], price: 200},
-    {name: "Table basse", category: categories[3], price: 60},
-    {name: "Marteau", category: categories[4], price: 10},
-    {name: "La bible", category: categories[5], price: 800},
-    {name: "pates", category: categories[1], price: 12},
-    {name: "Lit", category: categories[3] , price: 24},
-    {name: "Les ordinateurs pour les nuls", category: categories[5], price: 1},
-    {name: "Tournevis", category: categories[4], price: 8900}
+    {name: "Pizza", category: categories[1], price: 4, quantity: 0},
+    {name: "Pantalon", category: categories[2], price: 28, quantity: 0},
+    {name: "Jupe", category: categories[2], price: 200, quantity: 0},
+    {name: "Table basse", category: categories[3], price: 60, quantity: 0},
+    {name: "Marteau", category: categories[4], price: 10, quantity: 0},
+    {name: "La bible", category: categories[5], price: 800, quantity: 0},
+    {name: "pates", category: categories[1], price: 12, quantity: 0},
+    {name: "Lit", category: categories[3] , price: 24, quantity: 0},
+    {name: "Les ordinateurs pour les nuls", category: categories[5], price: 1, quantity: 0},
+    {name: "Tournevis", category: categories[4], price: 8900, quantity: 0}
 ]
 
+// Retourner le mot donné en paramètre avec seulement la première lettre en majuscule
 function capitalize( word){
 return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 }
 
 
-
+// Ajouter la catégorie donnée en paramètre sur la page HTML
 function createCategory(categorie){
 
     const nameHtml = document.createElement('li');
@@ -46,10 +49,13 @@ function createCategory(categorie){
         }); 
 }
 
+// Ajouter l'article donné en paramètre sur la page HTML
 function createArticle(article) {
+    // Création de la balise HTML
     const element = document.createElement("div")
     element.classList.add("article")
 
+    // Paramètres de l'article
     const name = document.createElement("h2");
     name.textContent = capitalize(article.name)
 
@@ -59,6 +65,7 @@ function createArticle(article) {
     const price = document.createElement("p")
     price.textContent = article.price + " €"
 
+    // Bouton pour ajouter l'article au panier
     const button = document.createElement("button")
     button.textContent = "Ajouter au panier"
     button.onclick = function() {
@@ -67,28 +74,24 @@ function createArticle(article) {
 
     element.append(name, category, price, button)
 
+    // Ajouter la balise
     articleContainer.append(element)
 }
 
 
-
+// Ajouter un article
 function addArticleToCart(article) {
+    // Panier
     const cart = document.getElementById("cart-container").getElementsByClassName("cart")[0]
-    const name = document.createElement("h2");
-    var ArticlesByNameInCart = cart.getElementsByTagName("h2");
 
-    var success = false
-    
-    for (var i = 0; i < ArticlesByNameInCart.length; i++) {
-        if (ArticlesByNameInCart[i].textContent == article.name) {
-            success = true;
-        }
-    }
-
-    if (success == false) {
+    // Si le panier ne contient pas l'article, ajouter la balise au panier
+    if (article.quantity == 0) {
+        // Paramètres de l'article
         const element = document.createElement("div")
         element.classList.add("article")
+        element.classList.add("cart-article")
 
+        const name = document.createElement("h2")
         name.textContent = article.name
 
         const category = document.createElement("p")
@@ -97,9 +100,12 @@ function addArticleToCart(article) {
         const price = document.createElement("p")
         price.textContent = article.price
 
+        // Mise à jour de la quantité
+        article.quantity = 1
         const quantity = document.createElement("p")
-        quantity.textContent = 1
+        quantity.textContent = article.quantity
 
+        // Bouton pour retirer l'article du panier
         const button = document.createElement("button")
         button.textContent = "Retirer du panier"
         button.onclick = function() {
@@ -108,8 +114,59 @@ function addArticleToCart(article) {
 
         element.append(name, category, price, quantity, button)
 
+        // Ajouter la balise
         cart.append(element)
     }
+    // Si l'article est déjà dans le panier, ajouter 1 à la quantité
+    else {
+        var articlesInCart = cart.getElementsByClassName("cart-article")
+        
+        for (var i = 0; i < articlesInCart.length; i++) {
+            if (articlesInCart[i].getElementsByTagName("h2")[0].textContent == article.name) {
+                const element = articlesInCart[i]
+                article.quantity += 1
+                const quantity = element.getElementsByTagName("p")[2]
+                quantity.textContent = article.quantity
+            }
+        }
+    }
+}
+
+
+function removeArticleFromCart(article) {
+    // Panier
+    const cart = document.getElementById("cart-container").getElementsByClassName("cart")[0]
+    // Articles du panier
+    var articlesInCart = cart.getElementsByClassName("cart-article")
+
+    // Parcourir le panier pour trouver l'article
+    for (var i = 0; i < articlesInCart.length; i++) {
+        if (articlesInCart[i].getElementsByTagName("h2")[0].textContent == article.name) {
+            const element = articlesInCart[i]
+            // Si le panier contient plusieurs fois l'article, en retirer 1
+            if (article.quantity > 1) {
+                article.quantity -= 1
+                const quantity = element.getElementsByTagName("p")[2]
+                quantity.textContent = article.quantity
+            }
+            // S'il n'en reste qu'un exemplaire, retirer le dernier et la balise dans le panier.
+            else {
+                article.quantity = 0
+                element.remove()
+            }
+        }
+    }
+}
+
+
+function pay() {
+    // Panier
+    const cart = document.getElementById("cart-container").getElementsByClassName("cart")[0]
+
+    // Réinitialiser la quantité pour tous les articles
+    articles_sort.map(article => article.quantity = 0)
+    // Retirer tous les articles du panier
+    cart.innerHTML = "";
 }
 
 
