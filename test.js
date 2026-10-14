@@ -57,7 +57,7 @@ document.addEventListener("category-selected", function(event){
 
 
 // Création des articles
-
+const letters = document.getElementById("letters");
 
 const articleContainer = document.getElementById("article-container")
 
@@ -147,3 +147,16 @@ const articles_sort = [...articles].sort((a, b) => {
 })
 
 articles_sort.map(article => createArticle(article))
+
+
+letters.addEventListener("submit", function(e){
+    e.preventDefault()
+    articleContainer.innerHTML = "";
+    const value = document.getElementById("input_web").value.toLowerCase();
+    let articlesFilter = articles_sort.filter(art => art.name.toLowerCase().includes(value))
+
+    if(articlesFilter.length == 0) articlesFilter = articles_sort;
+
+    articlesFilter.map(article => createArticle(article))
+    
+    })
