@@ -57,6 +57,8 @@ document.addEventListener("category-selected", function(event){
 
 // Création des articles
 
+const articleContainer = document.getElementById("article-container")
+
 const letters = document.getElementById("letters");
 
 const articles = [
