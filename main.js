@@ -138,6 +138,10 @@ function addArticleToCart(article) {
             removeArticleFromCart(article);
         };
 
+        // Bouton pour payer
+        const payButton = document.getElementsByClassName("cart-button")[0]
+        payButton.addEventListener('click', pay)
+
         element.append(name, category, price, quantity, button)
 
         // Ajouter la balise
