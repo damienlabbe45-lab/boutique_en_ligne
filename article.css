@@ -52,3 +52,29 @@
     font-weight: bold;
     color: #2563eb;
 }
+
+/* Bouton Ajouter au panier */
+.add-to-cart {
+    grid-column: 2;
+    grid-row: 3;
+
+    padding: 11px 20px;
+    background-color: #2563eb;
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+
+    box-shadow: 0 3px 8px rgba(37, 99, 235, 0.2);
+    transition: all 0.2s ease;
+}
+
+.add-to-cart:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(37, 99, 235, 0.3);
+}

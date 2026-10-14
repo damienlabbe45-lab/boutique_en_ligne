@@ -23,7 +23,6 @@ function createCategory(categorie){
  * l'évènement category-selected qui sera propagé jusqu'à ce fichier et ailleurs.
  */
     const nameHtml = document.createElement('li');
-    nameHtml.id ="ele"
         nameHtml.textContent = capitalize(categorie);
         list_cat.appendChild(nameHtml);
         nameHtml.addEventListener('click', function(){
@@ -77,7 +76,7 @@ const articles = [
 
 // Ajouter l'article donné en paramètre sur la page HTML
 function createArticle(article) {
-    // Création de la balise HTML
+    // Création de l'élement HTML
     const element = document.createElement("div")
     element.classList.add("article")
 
@@ -93,6 +92,7 @@ function createArticle(article) {
 
     // Bouton pour ajouter l'article au panier
     const button = document.createElement("button")
+    button.classList.add("add-to-cart")
     button.textContent = "Ajouter au panier"
     button.onclick = function() {
         addArticleToCart(article);
@@ -112,16 +112,17 @@ function addArticleToCart(article) {
 
     // Si le panier ne contient pas l'article, ajouter la balise au panier
     if (article.quantity == 0) {
-        // Paramètres de l'article
+        // Création de l'élement HTML
         const element = document.createElement("div")
         element.classList.add("article")
         element.classList.add("cart-article")
 
-        const name = document.createElement("h2")
-        name.textContent = article.name
+        // Paramètres de l'article
+        const name = document.createElement("h2");
+        name.textContent = capitalize(article.name)
 
         const category = document.createElement("p")
-        category.textContent = article.category
+        category.textContent = capitalize(article.category)
 
         const price = document.createElement("p")
         price.textContent = article.price + " €"
@@ -137,7 +138,6 @@ function addArticleToCart(article) {
         buttonAdd.onclick = function() {
             addArticleToCart(article);
         };
-
         // Bouton pour retirer l'article du panier
         const buttonRemoveAll = document.createElement("button")
         buttonRemoveAll.textContent = "Retirer du panier"
@@ -147,6 +147,7 @@ function addArticleToCart(article) {
 
         // Bouton pour enlever 1 à la quantité de l'article dans panier
         const buttonRemoveOne = document.createElement("button")
+        buttonRemoveAll.classList.add("remove-button")
         buttonRemoveOne.textContent = "Retirer 1"
         buttonRemoveOne.onclick = function() {
             removeOneArticleFromCart(article);

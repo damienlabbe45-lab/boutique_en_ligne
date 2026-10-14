@@ -11,26 +11,36 @@
 
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="article.css">
+        <link rel="stylesheet" href="category.css">
+        <link rel="stylesheet" href="cart.css">
         <script src="main.js" defer></script>
     </head>
     <body>
+        <header id="shop-header">
+            <h1>Boutique FMS</h1>
+            <p>Bievenue sur notre boutique. Ici vous trouverez de tout, que vous soyez riche ou pauvre. Tout nos article sont satisfait ou satisfait. Nous ne pratiquons pas de remboursement !</p>
+        </header>
+       
+        <div id="cart-container">
+            <div class="cart">
+                <!-- Contient les articles ajoutés au panier -->
+            </div>
+            <button class="cart-button">Payer</button>
+        </div>
 
-       <div id="cart-container">
-    <div class="cart">
-        <!-- Contient les articles ajoutés au panier -->
-    </div>
-    <button class="cart-button">Payer</button>
-</div>
+        <div id="filter-container">
+            <div id="category-container">
+                <!-- Catégories générées en JS -->
+            </div>
+            <form id="letters">
+                <input type="text" id="input_web"  pattern="[a-zA-Zà-ÿÀ-ŸñÑ]+" placeholder="Rechercher..."/>
+            </form>
+        </div>
 
-<div id="category-container">
-    <!-- Catégories générées en JS -->
-</div>
-<form id="letters">
-    <input type="text" id="input_web"  pattern="[a-zA-Zà-ÿÀ-ŸñÑ]+" />
-</form>
 
-<div id="article-container">
-    <!-- Articles générés en JS -->
-</div>
+
+        <div id="article-container">
+            <!-- Articles générés en JS -->
+        </div>
     </body>
 </html>
