@@ -50,7 +50,7 @@ document.addEventListener("category-selected", function(event){
         /** si categorie vaut tous,  on prend tout les articles et on les recréé */
 
     else{
-        articlesFilter = articles_sort.filter(art => art.category.toLowerCase().includes(categorieChoice))
+        const articlesFilter = articles_sort.filter(art => art.category.toLowerCase().includes(categorieChoice))
         articlesFilter.map(article => createArticle(article))}
         /**sinon on filtre les articles en fonction du nom de la catégorie puis on créé uniquement les articles concernés */
 })
