@@ -206,7 +206,6 @@ articles_sort.map(article => createArticle(article))
 letters.addEventListener("submit", function(e){
     /** on filtre sur les noms des articles et si il y a rien ou qu'on trouve rien, on remet tout les aricles */
     e.preventDefault()
-    const articleContainer = document.getElementById("article-container")
     articleContainer.innerHTML = "";
     const value = document.getElementById("input_web").value.toLowerCase();
     
