@@ -59,10 +59,59 @@ function createArticle(article) {
     const price = document.createElement("p")
     price.textContent = article.price + " €"
 
-    element.append(name, category, price)
+    const button = document.createElement("button")
+    button.textContent = "Ajouter au panier"
+    button.onclick = function() {
+        addArticleToCart(article);
+    };
+
+    element.append(name, category, price, button)
 
     articleContainer.append(element)
 }
+
+
+
+function addArticleToCart(article) {
+    const cart = document.getElementById("cart-container").getElementsByClassName("cart")[0]
+    const name = document.createElement("h2");
+    var ArticlesByNameInCart = cart.getElementsByTagName("h2");
+
+    var success = false
+    
+    for (var i = 0; i < ArticlesByNameInCart.length; i++) {
+        if (ArticlesByNameInCart[i].textContent == article.name) {
+            success = true;
+        }
+    }
+
+    if (success == false) {
+        const element = document.createElement("div")
+        element.classList.add("article")
+
+        name.textContent = article.name
+
+        const category = document.createElement("p")
+        category.textContent = article.category
+
+        const price = document.createElement("p")
+        price.textContent = article.price
+
+        const quantity = document.createElement("p")
+        quantity.textContent = 1
+
+        const button = document.createElement("button")
+        button.textContent = "Retirer du panier"
+        button.onclick = function() {
+            removeArticleFromCart(article);
+        };
+
+        element.append(name, category, price, quantity, button)
+
+        cart.append(element)
+    }
+}
+
 
 const articles_sort = [...articles].sort((a, b) => {
     return a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' });
@@ -76,6 +125,7 @@ const categories_sort = [...categories].sort((a, b) => {
 })
 
 categories_sort.map(categorie => createCategory(categorie))
+
 
 document.addEventListener("category-selected", function(event){
     const categorieChoice = event.detail.toLowerCase();
