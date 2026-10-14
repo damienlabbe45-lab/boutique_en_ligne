@@ -132,7 +132,7 @@ function addArticleToCart(article) {
         const button = document.createElement("button")
         button.textContent = "Retirer du panier"
         button.onclick = function() {
-            removeArticleFromCart(article);
+            removeOneArticleFromCart(article);
         };
 
         element.append(name, category, price, quantity, button)

@@ -132,19 +132,32 @@ function addArticleToCart(article) {
         const quantity = document.createElement("p")
         quantity.textContent = "Quantité : " + article.quantity
 
+        // Bouton pour ajouter l'article au panier
+        const buttonAdd = document.createElement("button")
+        buttonAdd.textContent = "Ajouter 1"
+        buttonAdd.onclick = function() {
+            addArticleToCart(article);
+        };
         // Bouton pour retirer l'article du panier
-        const button = document.createElement("button")
-        button.classList.add("remove-button")
-        button.textContent = "Retirer du panier"
-        button.onclick = function() {
+        const buttonRemoveAll = document.createElement("button")
+        buttonRemoveAll.textContent = "Retirer du panier"
+        buttonRemoveAll.onclick = function() {
             removeArticleFromCart(article);
+        };
+
+        // Bouton pour enlever 1 à la quantité de l'article dans panier
+        const buttonRemoveOne = document.createElement("button")
+        buttonRemoveAll.classList.add("remove-button")
+        buttonRemoveOne.textContent = "Retirer 1"
+        buttonRemoveOne.onclick = function() {
+            removeOneArticleFromCart(article);
         };
 
         // Bouton pour payer
         const payButton = document.getElementsByClassName("cart-button")[0]
         payButton.addEventListener('click', pay)
 
-        element.append(name, category, price, quantity, button)
+        element.append(name, category, price, quantity, buttonAdd, buttonRemoveAll, buttonRemoveOne)
 
         // Ajouter la balise
         cart.append(element)
@@ -158,7 +171,33 @@ function addArticleToCart(article) {
                 const element = articlesInCart[i]
                 article.quantity += 1
                 const quantity = element.getElementsByTagName("p")[2]
-                quantity.textContent = article.quantity
+                quantity.textContent = "Quantité : " + article.quantity
+            }
+        }
+    }
+}
+
+// Retire un exemplaire d'un article donné du panier (retire 1 à la quantité)
+function removeOneArticleFromCart(article) {
+    // Panier
+    const cart = document.getElementById("cart-container").getElementsByClassName("cart")[0]
+    // Articles du panier
+    var articlesInCart = cart.getElementsByClassName("cart-article")
+
+    // Parcourir le panier pour trouver l'article
+    for (var i = 0; i < articlesInCart.length; i++) {
+        if (articlesInCart[i].getElementsByTagName("h2")[0].textContent == article.name) {
+            const element = articlesInCart[i]
+            // Si le panier contient plusieurs fois l'article, en retirer 1
+            if (article.quantity > 1) {
+                article.quantity -= 1
+                const quantity = element.getElementsByTagName("p")[2]
+                quantity.textContent = "Quantité : " + article.quantity
+            }
+            // S'il n'en reste qu'un exemplaire, retirer le dernier et la balise dans le panier.
+            else {
+                article.quantity = 0
+                element.remove()
             }
         }
     }
@@ -175,17 +214,9 @@ function removeArticleFromCart(article) {
     for (var i = 0; i < articlesInCart.length; i++) {
         if (articlesInCart[i].getElementsByTagName("h2")[0].textContent == article.name) {
             const element = articlesInCart[i]
-            // Si le panier contient plusieurs fois l'article, en retirer 1
-            if (article.quantity > 1) {
-                article.quantity -= 1
-                const quantity = element.getElementsByTagName("p")[2]
-                quantity.textContent = article.quantity
-            }
-            // S'il n'en reste qu'un exemplaire, retirer le dernier et la balise dans le panier.
-            else {
-                article.quantity = 0
-                element.remove()
-            }
+            // Retirer l'article du panier et définir la quantité à 0
+            article.quantity = 0
+            element.remove()
         }
     }
 }
