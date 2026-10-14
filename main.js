@@ -23,7 +23,6 @@ function createCategory(categorie){
  * l'évènement category-selected qui sera propagé jusqu'à ce fichier et ailleurs.
  */
     const nameHtml = document.createElement('li');
-    nameHtml.id ="ele"
         nameHtml.textContent = capitalize(categorie);
         list_cat.appendChild(nameHtml);
         nameHtml.addEventListener('click', function(){
@@ -77,7 +76,7 @@ const articles = [
 
 // Ajouter l'article donné en paramètre sur la page HTML
 function createArticle(article) {
-    // Création de la balise HTML
+    // Création de l'élement HTML
     const element = document.createElement("div")
     element.classList.add("article")
 
@@ -93,6 +92,7 @@ function createArticle(article) {
 
     // Bouton pour ajouter l'article au panier
     const button = document.createElement("button")
+    button.classList.add("add-to-cart")
     button.textContent = "Ajouter au panier"
     button.onclick = function() {
         addArticleToCart(article);
@@ -112,27 +112,29 @@ function addArticleToCart(article) {
 
     // Si le panier ne contient pas l'article, ajouter la balise au panier
     if (article.quantity == 0) {
-        // Paramètres de l'article
+        // Création de l'élement HTML
         const element = document.createElement("div")
         element.classList.add("article")
         element.classList.add("cart-article")
 
-        const name = document.createElement("h2")
-        name.textContent = article.name
+        // Paramètres de l'article
+        const name = document.createElement("h2");
+        name.textContent = capitalize(article.name)
 
         const category = document.createElement("p")
-        category.textContent = article.category
+        category.textContent = capitalize(article.category)
 
         const price = document.createElement("p")
-        price.textContent = article.price
+        price.textContent = article.price + " €"
 
         // Mise à jour de la quantité
         article.quantity = 1
         const quantity = document.createElement("p")
-        quantity.textContent = article.quantity
+        quantity.textContent = "Quantité : " + article.quantity
 
         // Bouton pour retirer l'article du panier
         const button = document.createElement("button")
+        button.classList.add("remove-button")
         button.textContent = "Retirer du panier"
         button.onclick = function() {
             removeArticleFromCart(article);

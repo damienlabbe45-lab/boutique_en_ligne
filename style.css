@@ -1,3 +1,54 @@
+/* En-tête de la boutique */
+#shop-header {
+    max-width: 1100px;
+    margin: 0 auto 30px auto;
+    padding: 35px 40px;
+
+    background: linear-gradient(
+        135deg,
+        #eff6ff 0%,
+        #dbeafe 100%
+    );
+
+    border: 1px solid #bfdbfe;
+    border-radius: 16px;
+
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.06);
+}
+
+/* Titre */
+#shop-header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #1e3a8a;
+
+    margin: 0 0 15px 0;
+    letter-spacing: -1px;
+}
+
+/* Petite barre décorative */
+#shop-header h1::after {
+    content: "";
+    display: block;
+
+    width: 60px;
+    height: 4px;
+
+    background-color: #2563eb;
+    border-radius: 10px;
+
+    margin-top: 12px;
+}
+
+/* Description */
+#shop-header p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #475569;
+
+    max-width: 750px;
+    margin: 0;
+}
 
 body {
     font-family: 'Helvetica', 'Arial', sans-serif;
@@ -15,20 +66,6 @@ body {
 #category-container {
     max-width: 700px;
     margin: 0 auto;
-}
-
-header {
-    display: flex;
-    border-bottom: solid 2px gray;
-    height: 70px;
-}
-
-.header-logo {
-    width: 20%;
-    font-size: large;
-    font-weight: 600;
-    text-align: center;
-    margin: auto;
 }
 
 .tab-list {

@@ -1,0 +1,106 @@
+/* Catégories + recherche */
+#filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    max-width: 1100px;
+    margin: 0 auto 25px auto;
+}
+
+/* Conteneur des catégories */
+#category-container {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+}
+
+/* Liste horizontale */
+#cat {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Boutons des catégories */
+#cat li {
+    padding: 10px 18px;
+    background-color: white;
+    color: #374151;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 25px;
+
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+/* Effet au survol */
+#cat li:hover {
+    background-color: #eff6ff;
+    border-color: #2563eb;
+    color: #2563eb;
+    transform: translateY(-2px);
+}
+
+/* Catégorie sélectionnée */
+#cat li.active {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    color: white;
+    box-shadow: 0 3px 8px rgba(37,99,235,0.2);
+}
+
+/* Barre de recherche */
+#letters {
+    margin: 0;
+    flex-shrink: 0;
+}
+
+#letters input {
+    width: 220px;
+    padding: 11px 15px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+
+    background-color: white;
+    font-size: 14px;
+    color: #374151;
+
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+/* Lorsque l'utilisateur clique */
+#letters input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Placeholder */
+#letters input::placeholder {
+    color: #9ca3af;
+}
+
+/* Adaptation aux petits écrans */
+@media (max-width: 600px) {
+    #cat {
+        gap: 8px;
+    }
+
+    #cat li {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+}
