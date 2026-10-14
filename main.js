@@ -167,7 +167,7 @@ function addArticleToCart(article) {
         var articlesInCart = cart.getElementsByClassName("cart-article")
         
         for (var i = 0; i < articlesInCart.length; i++) {
-            if (articlesInCart[i].getElementsByTagName("h2")[0].textContent == article.name) {
+            if (articlesInCart[i].getElementsByTagName("h2")[0].textContent.toLowerCase() == article.name.toLowerCase()) {
                 const element = articlesInCart[i]
                 article.quantity += 1
                 const quantity = element.getElementsByTagName("p")[2]
@@ -186,7 +186,7 @@ function removeOneArticleFromCart(article) {
 
     // Parcourir le panier pour trouver l'article
     for (var i = 0; i < articlesInCart.length; i++) {
-        if (articlesInCart[i].getElementsByTagName("h2")[0].textContent == article.name) {
+        if (articlesInCart[i].getElementsByTagName("h2")[0].textContent.toLowerCase() == article.name.toLowerCase()) {
             const element = articlesInCart[i]
             // Si le panier contient plusieurs fois l'article, en retirer 1
             if (article.quantity > 1) {
@@ -212,7 +212,7 @@ function removeArticleFromCart(article) {
 
     // Parcourir le panier pour trouver l'article
     for (var i = 0; i < articlesInCart.length; i++) {
-        if (articlesInCart[i].getElementsByTagName("h2")[0].textContent == article.name) {
+        if (articlesInCart[i].getElementsByTagName("h2")[0].textContent.toLowerCase() == article.name.toLowerCase()) {
             const element = articlesInCart[i]
             // Retirer l'article du panier et définir la quantité à 0
             article.quantity = 0
