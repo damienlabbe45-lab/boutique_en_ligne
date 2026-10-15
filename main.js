@@ -44,14 +44,14 @@ document.addEventListener("category-selected", function(event){
     articleContainer.innerHTML = "";
 
     /** le innerHTML devient vide */
+    let articlesFilter = articles_sort
+    /** par défaut articleFilter vaut tout les articles */
 
-    if(categorieChoice =="tous") articles_sort.map(article => createArticle(article))
-        /** si categorie vaut tous,  on prend tout les articles et on les recréé */
+    if(categorieChoice !="tous") articlesFilter = articles_sort.filter(art => art.category.toLowerCase().includes(categorieChoice))
+        /** si categorie ne vaut pas tous,  on filtre les articles en fonction du nom de la catégorie et on les met dans articleFilter*/
 
-    else{
-        const articlesFilter = articles_sort.filter(art => art.category.toLowerCase().includes(categorieChoice))
-        articlesFilter.map(article => createArticle(article))}
-        /**sinon on filtre les articles en fonction du nom de la catégorie puis on créé uniquement les articles concernés */
+    articlesFilter.map(article => createArticle(article))
+        /**on crée uniquement les articles concernés */
 })
 
 // Création des articles
@@ -241,6 +241,8 @@ function pay() {
     // Retirer tous les articles du panier
     cart.innerHTML = "";
 }
+
+
 
 
 const articles_sort = [...articles].sort((a, b) => {
