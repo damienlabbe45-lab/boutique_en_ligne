@@ -278,12 +278,12 @@ function totalPrice() {
 
 
 letters.addEventListener("submit", function(e){
-    /** on filtre sur les noms des articles et si il y a rien ou qu'on trouve rien, on remet tout les aricles */
+    /** on filtre sur les noms des articles ou des catégories et si il y a rien ou qu'on trouve rien, on remet tout les aricles */
     e.preventDefault()
     articleContainer.innerHTML = "";
     const value = document.getElementById("input_web").value.toLowerCase();
     
-    let articlesFilter = articles_sort.filter(art => art.name.toLowerCase().includes(value))
+    let articlesFilter = articles_sort.filter(art => art.name.toLowerCase().includes(value) || art.category.toLowerCase().includes(value))
 
     if(articlesFilter.length == 0) articlesFilter = articles_sort;
 
