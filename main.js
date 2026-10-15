@@ -278,12 +278,17 @@ function totalPrice() {
 
 
 letters.addEventListener("submit", function(e){
-    /** on filtre sur les noms des articles ou des catégories et si il y a rien ou qu'on trouve rien, on remet tout les aricles */
+    /** on filtre sur les noms des articles ou des catégories ou sur la valeur max des prix 
+     * et si il y a rien ou qu'on trouve rien, on remet tout les aricles */
     e.preventDefault()
     articleContainer.innerHTML = "";
     const value = document.getElementById("input_web").value.toLowerCase();
+    let pricemax = -4
+    if(/^\d+$/.test(value)) pricemax = Number(value);
     
-    let articlesFilter = articles_sort.filter(art => art.name.toLowerCase().includes(value) || art.category.toLowerCase().includes(value))
+    let articlesFilter = articles_sort.filter(art => art.name.toLowerCase().includes(value) || 
+    art.category.toLowerCase().includes(value) || 
+art.price <= pricemax)
 
     if(articlesFilter.length == 0) articlesFilter = articles_sort;
 
