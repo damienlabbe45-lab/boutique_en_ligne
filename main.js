@@ -44,14 +44,14 @@ document.addEventListener("category-selected", function(event){
     articleContainer.innerHTML = "";
 
     /** le innerHTML devient vide */
+    let articlesFilter = articles_sort
+    /** par défaut articleFilter vaut tout les articles */
 
-    if(categorieChoice =="tous") articles_sort.map(article => createArticle(article))
-        /** si categorie vaut tous,  on prend tout les articles et on les recréé */
+    if(categorieChoice !="tous") articlesFilter = articles_sort.filter(art => art.category.toLowerCase().includes(categorieChoice))
+        /** si categorie ne vaut pas tous,  on filtre les articles en fonction du nom de la catégorie et on les met dans articleFilter*/
 
-    else{
-        const articlesFilter = articles_sort.filter(art => art.category.toLowerCase().includes(categorieChoice))
-        articlesFilter.map(article => createArticle(article))}
-        /**sinon on filtre les articles en fonction du nom de la catégorie puis on créé uniquement les articles concernés */
+    articlesFilter.map(article => createArticle(article))
+        /**on crée uniquement les articles concernés */
 })
 
 // Création des articles
@@ -67,7 +67,7 @@ const articles = [
     {name: "Table basse", category: categories[3], price: 60, quantity: 0},
     {name: "Marteau", category: categories[4], price: 10, quantity: 0},
     {name: "La bible", category: categories[5], price: 800, quantity: 0},
-    {name: "pates", category: categories[1], price: 12, quantity: 0},
+    {name: "Pates", category: categories[1], price: 12, quantity: 0},
     {name: "Lit", category: categories[3] , price: 24, quantity: 0},
     {name: "Les ordinateurs pour les nuls", category: categories[5], price: 1, quantity: 0},
     {name: "Tournevis", category: categories[4], price: 8900, quantity: 0}
@@ -109,6 +109,8 @@ function createArticle(article) {
 function addArticleToCart(article) {
     // Panier
     const cart = document.getElementById("cart-container").getElementsByClassName("cart")[0]
+    
+    
 
     // Si le panier ne contient pas l'article, ajouter la balise au panier
     if (article.quantity == 0) {
@@ -160,10 +162,7 @@ function addArticleToCart(article) {
         buttonRemoveAll.textContent = "Retirer du panier"
         buttonRemoveAll.onclick = function() {
             removeArticleFromCart(article);
-        };
-        
-
-        // Bouton pour payer
+        };// Bouton pour payer
         const payButton = document.getElementsByClassName("cart-button")[0]
         payButton.addEventListener('click', pay)
 
@@ -175,7 +174,7 @@ function addArticleToCart(article) {
     // Si l'article est déjà dans le panier, ajouter 1 à la quantité
     else {
         var articlesInCart = cart.getElementsByClassName("cart-article")
-        
+
         for (var i = 0; i < articlesInCart.length; i++) {
             if (articlesInCart[i].getElementsByTagName("h2")[0].textContent.toLowerCase() == article.name.toLowerCase()) {
                 const element = articlesInCart[i]
@@ -185,6 +184,9 @@ function addArticleToCart(article) {
             }
         }
     }
+
+    // Mettre à jour le prix total
+    totalPrice()
 }
 
 // Retire un exemplaire d'un article donné du panier (retire 1 à la quantité)
@@ -211,6 +213,9 @@ function removeOneArticleFromCart(article) {
             }
         }
     }
+
+    // Mettre à jour le prix total
+    totalPrice()
 }
 
 
@@ -229,6 +234,9 @@ function removeArticleFromCart(article) {
             element.remove()
         }
     }
+
+    // Mettre à jour le prix total
+    totalPrice()
 }
 
 
@@ -239,8 +247,13 @@ function pay() {
     // Réinitialiser la quantité pour tous les articles
     articles_sort.map(article => article.quantity = 0)
     // Retirer tous les articles du panier
-    cart.innerHTML = "";
+    cart.innerHTML = ""
+
+    // Mettre à jour le prix total
+    totalPrice()
 }
+
+
 
 
 const articles_sort = [...articles].sort((a, b) => {
@@ -248,6 +261,20 @@ const articles_sort = [...articles].sort((a, b) => {
 })
 
 articles_sort.map(article => createArticle(article))
+
+
+// Calcule le prix total et l'affiche dans le panier
+function totalPrice() {
+    // Balise du prix total
+    const element = document.getElementById("total-price")
+    // Prix total
+    var total = 0
+
+    // Ajouter le prix de chaque article * sa quantité au total
+    articles_sort.map(article => total += article.price * article.quantity)
+    // Ajouter le total à la page HTML
+    element.textContent = "Prix total : " + total + " €"
+}
 
 
 letters.addEventListener("submit", function(e){

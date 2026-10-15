@@ -96,8 +96,21 @@ body {
 
 .quantity-buttons button {
     display: block;
+    height: 30px;
     width: 30px;
     padding-inline: auto;
+    font-size: large;
+    background-color: white;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+    border-radius: 3px;
+}
+
+.quantity-buttons button:hover {
+    color: #2563eb;
+    background-color: #eff6ff;
+    border: 1px solid #2563eb;
+    transition: all 0.2s ease;
 }
 
 #cat {
