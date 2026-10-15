@@ -67,7 +67,7 @@ const articles = [
     {name: "Table basse", category: categories[3], price: 60, quantity: 0},
     {name: "Marteau", category: categories[4], price: 10, quantity: 0},
     {name: "La bible", category: categories[5], price: 800, quantity: 0},
-    {name: "pates", category: categories[1], price: 12, quantity: 0},
+    {name: "Pates", category: categories[1], price: 12, quantity: 0},
     {name: "Lit", category: categories[3] , price: 24, quantity: 0},
     {name: "Les ordinateurs pour les nuls", category: categories[5], price: 1, quantity: 0},
     {name: "Tournevis", category: categories[4], price: 8900, quantity: 0}
