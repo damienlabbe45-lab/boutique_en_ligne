@@ -184,6 +184,9 @@ function addArticleToCart(article) {
             }
         }
     }
+
+    // Mettre à jour le prix total
+    totalPrice()
 }
 
 // Retire un exemplaire d'un article donné du panier (retire 1 à la quantité)
@@ -210,6 +213,9 @@ function removeOneArticleFromCart(article) {
             }
         }
     }
+
+    // Mettre à jour le prix total
+    totalPrice()
 }
 
 
@@ -228,6 +234,9 @@ function removeArticleFromCart(article) {
             element.remove()
         }
     }
+
+    // Mettre à jour le prix total
+    totalPrice()
 }
 
 
@@ -238,7 +247,10 @@ function pay() {
     // Réinitialiser la quantité pour tous les articles
     articles_sort.map(article => article.quantity = 0)
     // Retirer tous les articles du panier
-    cart.innerHTML = "";
+    cart.innerHTML = ""
+
+    // Mettre à jour le prix total
+    totalPrice()
 }
 
 
@@ -249,6 +261,20 @@ const articles_sort = [...articles].sort((a, b) => {
 })
 
 articles_sort.map(article => createArticle(article))
+
+
+// Calcule le prix total et l'affiche dans le panier
+function totalPrice() {
+    // Balise du prix total
+    const element = document.getElementById("total-price")
+    // Prix total
+    var total = 0
+
+    // Ajouter le prix de chaque article * sa quantité au total
+    articles_sort.map(article => total += article.price * article.quantity)
+    // Ajouter le total à la page HTML
+    element.textContent = "Prix total : " + total + " €"
+}
 
 
 letters.addEventListener("submit", function(e){
