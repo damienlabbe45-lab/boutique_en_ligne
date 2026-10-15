@@ -109,6 +109,8 @@ function createArticle(article) {
 function addArticleToCart(article) {
     // Panier
     const cart = document.getElementById("cart-container").getElementsByClassName("cart")[0]
+    
+    
 
     // Si le panier ne contient pas l'article, ajouter la balise au panier
     if (article.quantity == 0) {
@@ -160,10 +162,7 @@ function addArticleToCart(article) {
         buttonRemoveAll.textContent = "Retirer du panier"
         buttonRemoveAll.onclick = function() {
             removeArticleFromCart(article);
-        };
-        
-
-        // Bouton pour payer
+        };// Bouton pour payer
         const payButton = document.getElementsByClassName("cart-button")[0]
         payButton.addEventListener('click', pay)
 
@@ -175,7 +174,7 @@ function addArticleToCart(article) {
     // Si l'article est déjà dans le panier, ajouter 1 à la quantité
     else {
         var articlesInCart = cart.getElementsByClassName("cart-article")
-        
+
         for (var i = 0; i < articlesInCart.length; i++) {
             if (articlesInCart[i].getElementsByTagName("h2")[0].textContent.toLowerCase() == article.name.toLowerCase()) {
                 const element = articlesInCart[i]
